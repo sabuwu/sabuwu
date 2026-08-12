@@ -1,8 +1,8 @@
 <div align="center">
   <h1>
-    <img src="compact_disk.gif" width="35" style="vertical-align: middle;" alt="Compact Disk" />
+    <img src="compact_disk.gif" width="40" style="vertical-align: middle;" alt="Compact Disk" />
       <bold>WELCOME TO SABUWU'S GITHUB PAGE!</bold>
-    <img src="compact_disk.gif" width="35" style="vertical-align: middle;" alt="Compact Disk" />
+    <img src="compact_disk.gif" width="40" style="vertical-align: middle;" alt="Compact Disk" />
   </h1>
 </div>
 
@@ -46,5 +46,6 @@
 <br />
 
 <div align="center">
-  <img src="computer.gif" alt="computer" width="120" />
+  <img src="computer.gif" alt="computer" width="300" /> <br />
+  > Your dream doesn't end here <
 </div>
