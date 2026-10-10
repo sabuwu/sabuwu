@@ -1,0 +1,49 @@
+# Local secrets (the example is deliberately tracked).
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# Official WordPress core is provided by the pinned container image.
+/app/wordpress/*
+!/app/wordpress/wp-config.php
+!/app/wordpress/wp-content/
+/app/wordpress/wp-content/*
+!/app/wordpress/wp-content/index.php
+!/app/wordpress/wp-content/themes/
+!/app/wordpress/wp-content/plugins/
+!/app/wordpress/wp-content/mu-plugins/
+!/app/wordpress/wp-content/uploads/
+/app/wordpress/wp-content/mu-plugins/aios-firewall-loader.php
+# Third-party plugins are reproduced from config/plugins.lock.
+/app/wordpress/wp-content/plugins/*
+!/app/wordpress/wp-content/plugins/.gitkeep
+!/app/wordpress/wp-content/plugins/sabuwu-*/
+/app/wordpress/wp-content/themes/twenty*/
+/app/wordpress/wp-content/themes/index.php
+/app/wordpress/wp-content/uploads/*
+!/app/wordpress/wp-content/uploads/.gitkeep
+!/app/wordpress/wp-content/uploads/portfolio/
+# Keep curated originals in uploads/portfolio; regenerate thumbnails.
+/app/wordpress/wp-content/uploads/portfolio/**/*-[0-9]*x[0-9]*.*
+/app/wordpress/wp-content/uploads/portfolio/**/*-scaled.*
+
+/backups/*
+!/backups/.gitkeep
+/database/exports/*
+!/database/exports/.gitkeep
+/database/seeds/*.tmp
+*.log
+*.sql.gz
+*.tmp
+*.swp
+*~
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+.pytest_cache/
+__pycache__/
+node_modules/
+

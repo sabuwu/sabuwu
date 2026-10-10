@@ -1,0 +1,29 @@
+/*
+Theme Name: Sabuwu
+Author: sabu
+Description: Tema próprio e leve para o portfólio WordPress.
+Version: 1.0.0
+License: GPL-2.0-or-later
+Text Domain: sabuwu
+*/
+:root { color-scheme: dark; --background: #10131a; --surface: #191e29; --text: #f1f4fa; --muted: #b2bdd1; --accent: #9fbaff; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--background); color: var(--text); font: 18px/1.7 system-ui, sans-serif; }
+a { color: var(--accent); text-underline-offset: .2em; }
+a:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+.skip-link { position: absolute; top: -100px; left: 1rem; padding: .5rem; background: var(--surface); }
+.skip-link:focus { top: 1rem; }
+.site-header, main, .site-footer { width: min(100% - 3rem, 960px); margin-inline: auto; }
+.site-header { padding-block: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; border-bottom: 1px solid #31394b; }
+.brand { font-size: 1.25rem; font-weight: 700; text-decoration: none; color: var(--text); }
+nav ul { display: flex; flex-wrap: wrap; gap: 1rem; padding: 0; margin: 0; list-style: none; }
+main { padding-block: 4rem; min-height: 65vh; }
+h1 { font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.2; letter-spacing: -.04em; }
+h2 { line-height: 1.3; margin-top: 2rem; }
+.tagline, .site-footer { color: var(--muted); }
+article { max-width: 760px; margin-bottom: 3rem; }
+.site-footer { padding-block: 2rem; border-top: 1px solid #31394b; font-size: .9rem; }
+img { max-width: 100%; height: auto; }
+pre { overflow: auto; padding: 1rem; background: var(--surface); }
+input, button, textarea { font: inherit; }
+
