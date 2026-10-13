@@ -1,5 +1,6 @@
 <?php defined('ABSPATH') || exit; ?>
 <main id="content">
+    <?php if (is_front_page() || is_page_template('page-portfolio.php')) : ?>
     <section class="hero" id="inicio" aria-labelledby="hero-heading">
         <div class="container hero-grid">
             <div class="reveal">
@@ -7,7 +8,7 @@
                 <h1 id="hero-heading"><?php echo esc_html(sabuwu_setting('hero_line_1')); ?><br><?php echo esc_html(sabuwu_setting('hero_line_2')); ?><br><span class="outline"><?php echo esc_html(sabuwu_setting('hero_line_3')); ?></span></h1>
                 <p class="hero-note"><?php echo esc_html(sabuwu_setting('hero_note')); ?></p>
                 <div class="hero-actions">
-                    <a class="btn btn-primary" href="#projetos"><?php echo esc_html(sabuwu_setting('hero_projects_label')); ?></a>
+                    <a class="btn btn-primary" href="<?php echo esc_url(sabuwu_section_url('projetos')); ?>"><?php echo esc_html(sabuwu_setting('hero_projects_label')); ?></a>
                     <?php foreach (['github_url' => 'hero_github_label', 'resume_url' => 'hero_resume_label'] as $key => $label) : ?>
                         <?php if (sabuwu_setting($key)) : ?>
                             <a class="btn btn-ghost" href="<?php echo esc_url(sabuwu_setting($key)); ?>"<?php echo sabuwu_link_attributes(sabuwu_setting($key)); ?>><?php echo esc_html(sabuwu_setting($label)); ?></a>
@@ -40,7 +41,10 @@
             </div>
         </div>
     <?php endif; ?>
+    <?php get_template_part('template-parts/latest-posts'); ?>
+    <?php endif; ?>
 
+    <?php if (is_page('projetos')) : ?>
     <section id="projetos" aria-labelledby="projects-heading">
         <div class="container section-shell">
             <aside class="section-index">
@@ -76,7 +80,9 @@
             </div>
         </div>
     </section>
+    <?php endif; ?>
 
+    <?php if (is_page('perfil')) : ?>
     <section id="perfil" aria-labelledby="profile-heading">
         <div class="container section-shell">
             <aside class="section-index">
@@ -98,7 +104,9 @@
             </div>
         </div>
     </section>
+    <?php endif; ?>
 
+    <?php if (is_page('experiencia')) : ?>
     <section id="experiencia" aria-labelledby="experience-heading">
         <div class="container section-shell">
             <aside class="section-index">
@@ -121,7 +129,9 @@
             </div>
         </div>
     </section>
+    <?php endif; ?>
 
+    <?php if (is_page('contato')) : ?>
     <section class="contact" id="contato" aria-labelledby="contact-heading">
         <div class="container section-shell">
             <aside class="section-index">
@@ -143,4 +153,5 @@
             </div>
         </div>
     </section>
+    <?php endif; ?>
 </main>

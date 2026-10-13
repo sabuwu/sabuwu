@@ -1,6 +1,6 @@
 # Portfólio WordPress
 
-O tema nativo **Sabuwu 2.0.0** reproduz o design de `app/portifolio_design.html` e permite editar o conteúdo pelo WordPress, sem construtor de páginas. O HTML original permanece como referência; o site usa os arquivos PHP, CSS e JavaScript do tema `sabuwu`.
+O tema nativo **Sabuwu 2.2.0** reproduz o design de `app/portifolio_design.html` e permite editar o conteúdo pelo WordPress, sem construtor de páginas. O HTML original permanece como referência; o site usa os arquivos PHP, CSS e JavaScript do tema `sabuwu`.
 
 No ambiente Docker deste projeto, o tema já está ativo. Com os serviços iniciados, acesse <http://localhost:8088/> e edite o site em <http://localhost:8088/wp-admin/>. Para preparar o ambiente, siga [Execução local](setup.md).
 
@@ -12,9 +12,9 @@ No ambiente Docker deste projeto, o tema já está ativo. Com os serviços inici
 
 Os três projetos e as métricas do HTML são exemplos de demonstração. Eles aparecem enquanto não houver projetos publicados e são substituídos automaticamente ao publicar o primeiro projeto. Para ocultá-los antes disso, desmarque **Exibir projetos de demonstração** em **Portfólio Sabuwu → Projetos**. Use suas próprias entregas e números verificáveis.
 
-A página inicial exibe o portfólio automaticamente por `front-page.php`. Para exibi-lo em outra URL, crie uma página em **Páginas → Adicionar nova**, escolha o modelo **Portfólio** e publique. O modelo usa o mesmo conteúdo configurado no Personalizador. As demais páginas, posts, buscas e estudos de caso usam os templates normais do tema.
+A página inicial do portfólio exibe a apresentação, a faixa de tecnologias e até três publicações recentes por `front-page.php`. Os posts publicados sem senha aparecem automaticamente com resumo, data e link de leitura. Na primeira atualização do tema, as páginas **Projetos**, **Perfil**, **Experiência** e **Contato** são criadas automaticamente quando ainda não existem; cada uma mostra sua seção correspondente e usa os textos configurados no Personalizador. As demais páginas, posts, buscas e estudos de caso usam os templates normais do tema. Se **Configurações → Leitura** usar **Seus posts mais recentes** como página inicial, a home exibe a lista completa de posts com paginação.
 
-O menu padrão aponta para as seções da página. Para substituí-lo, atribua um menu à localização **Navegação principal** em **Aparência → Menus**. Links internos abrem na mesma aba; destinos externos abrem em outra aba com `rel="noopener noreferrer"`.
+O menu padrão aponta para as páginas `/projetos/`, `/blog/`, `/perfil/`, `/experiencia/` e `/contato/`. **Blog** usa a página de posts configurada em **Configurações → Leitura**; se não houver uma, o tema cria e configura `/blog/` na atualização, mantendo a página inicial do portfólio. Essa página lista os posts com resumo e paginação. Para substituir a navegação, atribua um menu à localização **Navegação principal** em **Aparência → Menus**; links de menu antigos que apontam para essas âncoras são redirecionados às novas páginas. Links internos abrem na mesma aba; destinos externos abrem em outra aba com `rel="noopener noreferrer"`.
 
 Para instalar em outro WordPress, envie [dist/sabuwu-wordpress.zip](../dist/sabuwu-wordpress.zip) em **Aparência → Temas → Adicionar novo → Enviar tema** e ative **Sabuwu**. O ZIP contém a pasta `sabuwu/`; também é possível copiá-la diretamente para `wp-content/themes/`. O pacote instala o tema; as edições e os projetos ficam no banco da instalação.
 

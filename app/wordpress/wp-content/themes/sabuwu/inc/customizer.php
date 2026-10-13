@@ -38,7 +38,7 @@ function sabuwu_defaults(): array {
         'meta_focus_label' => 'Foco',
         'meta_focus_value' => 'Web, APIs & Automação',
         'meta_stack_label' => 'Stack',
-        'meta_stack_value' => 'TypeScript / Python / SQL',
+        'meta_stack_value' => 'Python / FullStack / LAMP',
         'meta_interests_label' => 'Interesses',
         'meta_interests_value' => 'Linux / Infra / IA',
         'ticker_items' => "Full Stack Development\nAPIs\nAutomation\nLinux\nPerformance\nOpen Source",
