@@ -1,0 +1,8 @@
+:root { color-scheme: dark; }
+body { background: #0d0d0d; color: #f0ede5; font-family: Inter, system-ui, sans-serif; line-height: 1.6; }
+.editor-styles-wrapper { background: #0d0d0d; color: #f0ede5; }
+.wp-block { max-width: 920px; }
+a { color: #f0ede5; }
+h1, h2, h3 { line-height: 1.1; letter-spacing: -.04em; }
+pre, code { background: #171717; }
+blockquote { border-left: 2px solid #a8a39a; padding-left: 1.5rem; }

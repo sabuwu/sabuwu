@@ -4,6 +4,8 @@ Core: **7.1.3**. PHP: **8.3**. WP-CLI: **2.12.0**, com SHA-256 verificado no bui
 
 O tema `sabuwu` e `mu-plugins/portfolio-hardening.php` são código próprio. O tema usa APIs nativas, sem construtor externo. O mu-plugin desativa pingbacks/XML-RPC, evita revelar erros detalhados de login, controla envio local de email e fornece um evento de diagnóstico de cron. Gutenberg e REST API continuam disponíveis.
 
+O tema Sabuwu 2.0.0 integra o layout de `app/portifolio_design.html`, com textos editáveis no Personalizador e cadastro nativo de projetos. Consulte [Portfólio WordPress](portfolio.md) para editar o conteúdo ou instalar o pacote em outra instalação.
+
 ## Plugins
 
 | Plugin | Versão fixada | Estado esperado em desenvolvimento | Motivo / configuração |

@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfólio de desenvolvedor Full Stack com foco em produto, engenharia e impacto." />
+  <meta name="theme-color" content="#0d0d0d" />
+  <title>sabuwu — Software Developer</title>
+
+  <style>
+    :root{
+      --black:#0d0d0d;
+      --black-2:#171717;
+      --paper:#f0ede5;
+      --paper-2:#e7e3da;
+      --ink-soft:#9f9a91;
+      --line:#2a2a2a;
+      --line-light:#cfc9be;
+      --accent:#a8a39a;
+      --max:1240px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:var(--black);
+      color:var(--paper);
+      line-height:1.5;
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.035;
+      z-index:999;
+      background-image:
+        radial-gradient(circle at 20% 20%, #fff 0 1px, transparent 1px),
+        radial-gradient(circle at 80% 70%, #fff 0 1px, transparent 1px);
+      background-size:18px 18px, 21px 21px;
+      mix-blend-mode:screen;
+    }
+
+    a{color:inherit;text-decoration:none}
+    .container{width:min(var(--max),calc(100% - 48px));margin:auto}
+
+    .topbar{
+      position:sticky;top:0;z-index:40;
+      background:rgba(13,13,13,.88);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      height:72px;
+      display:grid;
+      grid-template-columns:1fr auto 1fr;
+      align-items:center;
+      gap:24px;
+    }
+
+    .logo{
+      font-weight:900;
+      letter-spacing:-.04em;
+      font-size:1.05rem;
+    }
+
+    .nav{
+      display:flex;
+      gap:28px;
+      color:var(--accent);
+      font-size:.92rem;
+      font-weight:700;
+    }
+
+    .nav a{transition:.2s}
+    .nav a:hover{color:var(--paper)}
+
+    .availability{
+      justify-self:end;
+      display:flex;
+      align-items:center;
+      gap:9px;
+      color:var(--accent);
+      font-size:.82rem;
+      font-weight:800;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+    }
+
+    .availability::before{
+      content:"";
+      width:8px;height:8px;border-radius:50%;
+      background:var(--paper);
+      box-shadow:0 0 0 4px rgba(240,237,229,.08);
+    }
+
+    .hero{
+      min-height:calc(100vh - 72px);
+      display:flex;
+      align-items:center;
+      border-bottom:1px solid var(--line);
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.45fr .55fr;
+      gap:56px;
+      padding:70px 0 62px;
+      align-items:end;
+    }
+
+    .kicker{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      font-size:.78rem;
+      font-weight:800;
+      color:var(--accent);
+      margin-bottom:26px;
+    }
+
+    .kicker::before{
+      content:"";
+      width:48px;height:1px;background:var(--accent);
+    }
+
+    h1{
+      font-size:clamp(4rem,10vw,9.5rem);
+      line-height:.84;
+      letter-spacing:-.075em;
+      font-weight:900;
+      max-width:1000px;
+    }
+
+    .outline{
+      color:transparent;
+      -webkit-text-stroke:1.5px var(--paper);
+      text-stroke:1.5px var(--paper);
+    }
+
+    .hero-note{
+      margin-top:34px;
+      max-width:700px;
+      font-size:1.06rem;
+      color:var(--accent);
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:30px;
+    }
+
+    .btn{
+      min-height:48px;
+      padding:0 17px;
+      border:1px solid var(--paper);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:850;
+      font-size:.9rem;
+      transition:.2s ease;
+    }
+
+    .btn-primary{
+      color:var(--black);
+      background:var(--paper);
+    }
+
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary:hover{background:var(--paper-2)}
+    .btn-ghost:hover{background:var(--paper);color:var(--black)}
+
+    .hero-side{
+      border-left:1px solid var(--line);
+      padding-left:28px;
+    }
+
+    .meta{
+      padding:18px 0;
+      border-bottom:1px solid var(--line);
+    }
+
+    .meta:last-child{border-bottom:0}
+    .meta span{
+      display:block;
+      color:#69655f;
+      font-size:.73rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-weight:900;
+      margin-bottom:5px;
+    }
+
+    .meta strong{
+      font-size:1rem;
+      font-weight:750;
+      color:var(--paper);
+    }
+
+    .ticker{
+      overflow:hidden;
+      border-bottom:1px solid var(--line);
+      background:var(--paper);
+      color:var(--black);
+    }
+
+    .ticker-track{
+      width:max-content;
+      display:flex;
+      animation:scroll 22s linear infinite;
+    }
+
+    .ticker span{
+      padding:12px 30px;
+      font-size:.76rem;
+      font-weight:950;
+      letter-spacing:.13em;
+      text-transform:uppercase;
+      white-space:nowrap;
+    }
+
+    .ticker span::after{
+      content:"✦";
+      margin-left:30px;
+      color:#5f5b55;
+    }
+
+    @keyframes scroll{
+      to{transform:translateX(-50%)}
+    }
+
+    section{border-bottom:1px solid var(--line)}
+    .section-shell{
+      display:grid;
+      grid-template-columns:260px 1fr;
+      gap:50px;
+      padding:100px 0;
+    }
+
+    .section-index{
+      position:sticky;
+      top:100px;
+      align-self:start;
+    }
+
+    .section-index small{
+      display:block;
+      color:#64605a;
+      font-size:.75rem;
+      font-weight:900;
+      letter-spacing:.13em;
+      text-transform:uppercase;
+      margin-bottom:10px;
+    }
+
+    .section-index h2{
+      font-size:2rem;
+      line-height:1;
+      letter-spacing:-.045em;
+      max-width:190px;
+    }
+
+    .section-content{min-width:0}
+
+    .lead{
+      font-size:clamp(1.7rem,3.8vw,3.6rem);
+      line-height:1.05;
+      letter-spacing:-.045em;
+      max-width:920px;
+      margin-bottom:52px;
+    }
+
+    .lead .soft{color:#67635d}
+
+    .projects{
+      display:grid;
+      gap:0;
+      border-top:1px solid var(--line);
+    }
+
+    .project{
+      display:grid;
+      grid-template-columns:110px 1.3fr .7fr;
+      gap:30px;
+      align-items:start;
+      padding:34px 0;
+      border-bottom:1px solid var(--line);
+      transition:.25s ease;
+    }
+
+    .project:hover{
+      padding-left:14px;
+      background:linear-gradient(90deg,rgba(255,255,255,.025),transparent);
+    }
+
+    .project-no{
+      font-size:.78rem;
+      color:#615e58;
+      letter-spacing:.12em;
+      font-weight:900;
+    }
+
+    .project h3{
+      font-size:clamp(1.7rem,3vw,3rem);
+      line-height:.95;
+      letter-spacing:-.045em;
+      margin-bottom:16px;
+    }
+
+    .project p{
+      max-width:650px;
+      color:var(--accent);
+    }
+
+    .tags{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+
+    .tag{
+      border:1px solid #343434;
+      padding:6px 9px;
+      font-size:.73rem;
+      color:#aaa59d;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      font-weight:800;
+    }
+
+    .project-metrics{
+      display:grid;
+      gap:18px;
+    }
+
+    .metric{
+      border-left:1px solid #333;
+      padding-left:14px;
+    }
+
+    .metric strong{
+      display:block;
+      font-size:1.45rem;
+      letter-spacing:-.03em;
+    }
+
+    .metric span{
+      display:block;
+      color:#67635e;
+      font-size:.8rem;
+      margin-top:2px;
+    }
+
+    .link-row{
+      margin-top:20px;
+      display:flex;
+      gap:16px;
+      font-weight:850;
+      font-size:.85rem;
+    }
+
+    .link-row a{
+      border-bottom:1px solid #5c5852;
+      padding-bottom:2px;
+    }
+
+    .link-row a:hover{border-color:var(--paper)}
+
+    .proof-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      border-top:1px solid var(--line);
+      border-left:1px solid var(--line);
+    }
+
+    .proof{
+      padding:28px;
+      min-height:180px;
+      border-right:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      transition:.2s;
+    }
+
+    .proof:hover{
+      background:var(--paper);
+      color:var(--black);
+    }
+
+    .proof .num{
+      color:#5f5b55;
+      font-size:.74rem;
+      font-weight:900;
+      letter-spacing:.12em;
+    }
+
+    .proof h3{
+      font-size:1.35rem;
+      letter-spacing:-.03em;
+      margin-top:30px;
+    }
+
+    .proof p{
+      color:#77726a;
+      margin-top:8px;
+      font-size:.9rem;
+    }
+
+    .proof:hover p,.proof:hover .num{color:#5c5852}
+
+    .experience{
+      display:grid;
+      border-top:1px solid var(--line);
+    }
+
+    .xp{
+      display:grid;
+      grid-template-columns:150px 1fr auto;
+      gap:24px;
+      padding:26px 0;
+      border-bottom:1px solid var(--line);
+    }
+
+    .xp time{
+      color:#66615b;
+      font-size:.82rem;
+      font-weight:850;
+    }
+
+    .xp h3{
+      font-size:1.18rem;
+      margin-bottom:6px;
+    }
+
+    .xp p{
+      color:var(--accent);
+      max-width:720px;
+    }
+
+    .xp .type{
+      color:#69655f;
+      font-size:.75rem;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      font-weight:900;
+      white-space:nowrap;
+    }
+
+    .contact{
+      background:var(--paper);
+      color:var(--black);
+      border-bottom:0;
+    }
+
+    .contact .section-shell{
+      padding-top:110px;
+      padding-bottom:110px;
+    }
+
+    .contact .section-index small{color:#78736b}
+    .contact .section-index h2{color:var(--black)}
+
+    .contact h2.big{
+      font-size:clamp(3.5rem,8vw,8rem);
+      line-height:.88;
+      letter-spacing:-.07em;
+      max-width:900px;
+    }
+
+    .contact p{
+      margin-top:26px;
+      font-size:1.02rem;
+      max-width:680px;
+      color:#5f5a53;
+    }
+
+    .contact-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:28px;
+    }
+
+    .contact .btn{
+      border-color:var(--black);
+    }
+
+    .contact .btn-primary{
+      background:var(--black);
+      color:var(--paper);
+    }
+
+    .contact .btn-ghost:hover{
+      background:var(--black);
+      color:var(--paper);
+    }
+
+    footer{
+      background:var(--paper);
+      color:#5d5851;
+      border-top:1px solid var(--line-light);
+      padding:24px 0 34px;
+    }
+
+    .footer-inner{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      font-size:.83rem;
+    }
+
+    .footer-links{
+      display:flex;
+      gap:18px;
+      color:var(--black);
+      font-weight:800;
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(20px);
+      transition:.7s cubic-bezier(.2,.8,.2,1);
+    }
+    .reveal.visible{opacity:1;transform:none}
+
+    @media(max-width:950px){
+      .topbar-inner{grid-template-columns:1fr auto}
+      .nav{display:none}
+      .hero-grid{grid-template-columns:1fr}
+      .hero-side{
+        border-left:0;
+        border-top:1px solid var(--line);
+        padding-left:0;
+        padding-top:18px;
+        display:grid;
+        grid-template-columns:repeat(2,1fr);
+        gap:0 24px;
+      }
+      .section-shell{grid-template-columns:1fr;gap:28px}
+      .section-index{position:static}
+      .section-index h2{max-width:none}
+      .project{grid-template-columns:70px 1fr}
+      .project-metrics{
+        grid-column:2;
+        grid-template-columns:repeat(3,1fr);
+      }
+    }
+
+    @media(max-width:640px){
+      .container{width:min(var(--max),calc(100% - 24px))}
+      .topbar-inner{height:64px}
+      .availability{display:none}
+      .hero{min-height:auto}
+      .hero-grid{padding:56px 0}
+      h1{font-size:3.9rem}
+      .hero-side{grid-template-columns:1fr}
+      .section-shell{padding:74px 0}
+      .lead{font-size:2rem}
+      .project{
+        grid-template-columns:1fr;
+        gap:14px;
+        padding:28px 0;
+      }
+      .project-metrics{
+        grid-column:auto;
+        grid-template-columns:1fr;
+      }
+      .proof-grid{grid-template-columns:1fr}
+      .xp{grid-template-columns:1fr;gap:8px}
+      .xp .type{white-space:normal}
+      .footer-inner{flex-direction:column;align-items:flex-start}
+      .contact h2.big{font-size:4rem}
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      *,*::before,*::after{animation:none!important;transition:none!important}
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="logo" href="#inicio">SABUWU.dev</a>
+
+      <nav class="nav" aria-label="Navegação principal">
+        <a target="_blank" href="#projetos">Projetos</a>
+        <a target="_blank" href="#perfil">Perfil</a>
+        <a target="_blank" href="#experiencia">Experiência</a>
+        <a target="_blank" href="#contato">Contato</a>
+      </nav>
+
+      <div class="availability">Disponível para oportunidades</div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="kicker">Software Developer / 2026</div>
+
+          <h1>
+            BUILD.<br>
+            SOLVE.<br>
+            <span class="outline">IMPROVE.</span>
+          </h1>
+
+          <p class="hero-note">
+            Desenvolvedor Full Stack focado em transformar problemas reais em software
+            simples, rápido e fácil de manter — de APIs e automações a produtos web completos.
+          </p>
+
+          <div class="hero-actions">
+            <a target="_blank" class="btn btn-primary" href="#projetos">Explorar projetos</a>
+            <a target="_blank" class="btn btn-ghost" href="https://github.com/sabuwu">GitHub ↗</a>
+            <a target="_blank" class="btn btn-ghost" href="#">Currículo ↗</a>
+          </div>
+        </div>
+
+        <aside class="hero-side reveal">
+          <div class="meta">
+            <span>Base</span>
+            <strong>Brasil</strong>
+          </div>
+          <div class="meta">
+            <span>Foco</span>
+            <strong>Web, APIs & Automação</strong>
+          </div>
+          <div class="meta">
+            <span>Stack</span>
+            <strong>TypeScript / Python / SQL</strong>
+          </div>
+          <div class="meta">
+            <span>Interesses</span>
+            <strong>Linux / Infra / IA</strong>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>Full Stack Development</span>
+        <span>APIs</span>
+        <span>Automation</span>
+        <span>Linux</span>
+        <span>Performance</span>
+        <span>Open Source</span>
+
+        <span>Full Stack Development</span>
+        <span>APIs</span>
+        <span>Automation</span>
+        <span>Linux</span>
+        <span>Performance</span>
+        <span>Open Source</span>
+      </div>
+    </div>
+
+    <section id="projetos">
+      <div class="container section-shell">
+        <aside class="section-index">
+          <small>01 / Selected work</small>
+          <h2>Projetos que provam capacidade.</h2>
+        </aside>
+
+        <div class="section-content">
+          <p class="lead reveal">
+            Menos “eu sei tecnologia X”.<br>
+            <span class="soft">Mais problema, decisão e resultado.</span>
+          </p>
+
+          <div class="projects">
+            <article class="project reveal">
+              <div class="project-no">01 — 03</div>
+
+              <div>
+                <h3>Pulse<br>System Monitor</h3>
+                <p>
+                  Dashboard full stack para acompanhar CPU, RAM, disco e eventos do sistema
+                  em tempo real, com foco em observabilidade e diagnóstico rápido.
+                </p>
+
+                <div class="tags">
+                  <span class="tag">React</span>
+                  <span class="tag">TypeScript</span>
+                  <span class="tag">Node.js</span>
+                  <span class="tag">WebSocket</span>
+                  <span class="tag">PostgreSQL</span>
+                  <span class="tag">Docker</span>
+                </div>
+
+                <div class="link-row">
+                  <a target="_blank" href="#">Live demo ↗</a>
+                  <a target="_blank" href="https://github.com/sabuwu">GitHub ↗</a>
+                  <a target="_blank" href="#">Case study ↗</a>
+                </div>
+              </div>
+
+              <div class="project-metrics">
+                <div class="metric">
+                  <strong>−35%</strong>
+                  <span>tempo médio para localizar gargalos</span>
+                </div>
+                <div class="metric">
+                  <strong>&lt;120ms</strong>
+                  <span>latência média da API</span>
+                </div>
+                <div class="metric">
+                  <strong>24/7</strong>
+                  <span>coleta contínua de métricas</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project reveal">
+              <div class="project-no">02 — 03</div>
+
+              <div>
+                <h3>Scout<br>Jobs Engine</h3>
+                <p>
+                  Coletor e normalizador de vagas públicas que transforma múltiplas fontes
+                  em uma API pesquisável por stack, senioridade e modelo de trabalho.
+                </p>
+
+                <div class="tags">
+                  <span class="tag">Python</span>
+                  <span class="tag">FastAPI</span>
+                  <span class="tag">Scraping</span>
+                  <span class="tag">Redis</span>
+                  <span class="tag">PostgreSQL</span>
+                </div>
+
+                <div class="link-row">
+                  <a target="_blank" href="#">API docs ↗</a>
+                  <a target="_blank" href="https://github.com/sabuwu">GitHub ↗</a>
+                </div>
+              </div>
+
+              <div class="project-metrics">
+                <div class="metric">
+                  <strong>1.2K+</strong>
+                  <span>registros processados</span>
+                </div>
+                <div class="metric">
+                  <strong>−62%</strong>
+                  <span>duplicatas após normalização</span>
+                </div>
+                <div class="metric">
+                  <strong>REST</strong>
+                  <span>API própria documentada</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project reveal">
+              <div class="project-no">03 — 03</div>
+
+              <div>
+                <h3>Atlas<br>File Manager</h3>
+                <p>
+                  Gerenciador de arquivos web inspirado em aplicações desktop,
+                  com upload em partes, autenticação, busca e integração com armazenamento externo.
+                </p>
+
+                <div class="tags">
+                  <span class="tag">Go</span>
+                  <span class="tag">React</span>
+                  <span class="tag">JWT</span>
+                  <span class="tag">S3</span>
+                  <span class="tag">CI/CD</span>
+                </div>
+
+                <div class="link-row">
+                  <a target="_blank" href="#">Demo ↗</a>
+                  <a target="_blank" href="https://github.com/sabuwu">GitHub ↗</a>
+                </div>
+              </div>
+
+              <div class="project-metrics">
+                <div class="metric">
+                  <strong>Chunks</strong>
+                  <span>uploads grandes com retomada</span>
+                </div>
+                <div class="metric">
+                  <strong>RBAC</strong>
+                  <span>controle de acesso por função</span>
+                </div>
+                <div class="metric">
+                  <strong>CI</strong>
+                  <span>pipeline automatizado</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="perfil">
+      <div class="container section-shell">
+        <aside class="section-index">
+          <small>02 / Why me</small>
+          <h2>O que diferencia meu trabalho.</h2>
+        </aside>
+
+        <div class="section-content">
+          <p class="lead reveal">
+            Código bom não é só o que funciona.
+            <span class="soft">É o que outra pessoa consegue entender e continuar.</span>
+          </p>
+
+          <div class="proof-grid">
+            <article class="proof reveal">
+              <span class="num">01</span>
+              <div>
+                <h3>README reproduzível</h3>
+                <p>Setup claro, dependências documentadas e instruções objetivas.</p>
+              </div>
+            </article>
+
+            <article class="proof reveal">
+              <span class="num">02</span>
+              <div>
+                <h3>Decisões explicadas</h3>
+                <p>Não mostro só o resultado; mostro por que a arquitetura foi escolhida.</p>
+              </div>
+            </article>
+
+            <article class="proof reveal">
+              <span class="num">03</span>
+              <div>
+                <h3>Impacto mensurável</h3>
+                <p>Projetos apresentados com métricas, limitações e aprendizados reais.</p>
+              </div>
+            </article>
+
+            <article class="proof reveal">
+              <span class="num">04</span>
+              <div>
+                <h3>Produto + engenharia</h3>
+                <p>Preocupação com experiência, manutenção, performance e não só features.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experiencia">
+      <div class="container section-shell">
+        <aside class="section-index">
+          <small>03 / Experience</small>
+          <h2>Experiência demonstrada por entregas.</h2>
+        </aside>
+
+        <div class="section-content">
+          <p class="lead reveal">
+            A trajetória importa.
+            <span class="soft">Mas o que você consegue entregar importa mais.</span>
+          </p>
+
+          <div class="experience">
+            <article class="xp reveal">
+              <time>2026 — atual</time>
+              <div>
+                <h3>Projetos autorais / Full Stack</h3>
+                <p>APIs, aplicações web, observabilidade, automações e infraestrutura.</p>
+              </div>
+              <span class="type">Independent</span>
+            </article>
+
+            <article class="xp reveal">
+              <time>2025 — 2026</time>
+              <div>
+                <h3>Freelance / Web & integrações</h3>
+                <p>Sites, integrações com serviços externos, formulários e automações.</p>
+              </div>
+              <span class="type">Freelance</span>
+            </article>
+
+            <article class="xp reveal">
+              <time>2025 — atual</time>
+              <div>
+                <h3>Open source & laboratório pessoal</h3>
+                <p>Estudos avançados de Linux, ferramentas CLI, servidores e projetos públicos.</p>
+              </div>
+              <span class="type">Open source</span>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contato">
+      <div class="container section-shell">
+        <aside class="section-index">
+          <small>04 / Contact</small>
+          <h2>Vamos conversar.</h2>
+        </aside>
+
+        <div class="section-content reveal">
+          <h2 class="big">PRECISA DE<br>ALGUÉM QUE<br>ENTREGA?</h2>
+          <p>
+            Estou aberto a oportunidades em desenvolvimento web, backend,
+            automação e infraestrutura. Se o problema for interessante, melhor ainda.
+          </p>
+
+          <div class="contact-actions">
+            <a target="_blank" class="btn btn-primary" href="mailto:sabuwu091@gmail.com">sabuwu091@gmail.com</a>
+            <a target="_blank" class="btn btn-ghost" href="https://discord.com/users/1530788587845718147">Discord ↗</a>
+            <a target="_blank" class="btn btn-ghost" href="https://github.com/sabuwu">GitHub ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> sabuwu — Software Developer</span>
+      <div class="footer-links">
+        <a target="_blank" href="#inicio">Topo ↑</a>
+        <a target="_blank" href="https://github.com/sabuwu">GitHub</a>
+        <a target="_blank" href="https://discord.com/users/1530788587845718147">Discord</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const items = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    items.forEach(item => observer.observe(item));
+  </script>
+</body>
+</html>
