@@ -49,3 +49,13 @@
   <img src="assets/images/computer.gif" alt="computer" width="300" /> <br />
   > Your dream doesn't end here <
 </div>
+
+## Portfólio WordPress
+
+O site usa o tema nativo Sabuwu e um ambiente local com Docker ou Podman.
+
+- [Documentação e organização do projeto](docs/README.md)
+- [Execução local](docs/setup.md)
+- [Edição do portfólio e instalação do tema](docs/portfolio.md)
+- [Plugins e conteúdo versionado](docs/wordpress.md)
+- [Comandos, backup e restauração](docs/commands.md)

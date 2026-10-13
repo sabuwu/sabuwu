@@ -25,7 +25,11 @@ O banco tem 300 segundos de tolerância inicial, e WordPress 1800, para iniciali
 
 **Login bloqueado após teste:** aguarde o prazo configurado ou remova o bloqueio local com WP-CLI conforme a tabela All-In-One Security após confirmar o IP. Não desative a proteção permanente para resolver uma tentativa isolada. Testes devem usar nomes descartáveis, nunca a conta administrativa real.
 
-**SMTP/Akismet não enviam/validam:** precisam de credenciais externas. Por padrão, desenvolvimento não envia email real e Akismet não tem chave. Atualize o ambiente com `docker compose up -d`; `restart` sozinho não reaplica variáveis modificadas.
+**SMTP/Akismet ausentes ou sem funcionamento:** são integrações condicionais. Akismet exige `AKISMET_API_KEY` ou chave salva no painel; WP Mail SMTP exige `SMTP_HOST` ou transporte configurado no painel. Sem configuração, não são instalados como parte da base. Configurações existentes no painel são preservadas. Para comentários abertos, forneça uma chave válida do Akismet e teste a integração.
+
+Em ambientes diferentes de produção, o mu-plugin bloqueia emails quando `SMTP_HOST` está vazio, mesmo com transporte salvo no painel. A presença do WP Mail SMTP não libera envio local. Após alterar variáveis, recrie os serviços com `docker compose up -d`; `restart` sozinho não reaplica variáveis modificadas. Execute `./scripts/install-plugins.sh` para reaplicar os critérios após alterar a configuração de uma integração e verifique `./scripts/wp.sh plugin list`.
+
+**LiteSpeed Cache ou UpdraftPlus ausentes:** foram retirados do manifesto. O servidor Apache não usa as otimizações do LiteSpeed Cache; OPcache segue habilitado. Backups operacionais são feitos por `./scripts/backup.sh` e restaurados por `./scripts/restore.sh`, conforme [Comandos](commands.md).
 
 **Checksums:** `wp-config.php` e código próprio são configurações esperadas; o Core deve passar `wp core verify-checksums`. Se um plugin divergir, preserve qualquer trabalho próprio e reinstale somente a dependência oficial afetada com a versão do manifesto. Regras geradas em `.htaccess`, logs e caches não devem entrar no commit.
 

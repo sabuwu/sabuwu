@@ -18,7 +18,11 @@ O banco pertence somente à rede `backend`, marcada `internal: true`, sem portas
 
 `database_data` persiste o banco. `app_secrets` persiste as credenciais da aplicação; `db_secrets` contém a senha root, acessível somente pelo bootstrap e MariaDB. O `.env` permanece no host e só é montado no bootstrap. Os volumes não substituem o Git.
 
-`app/wordpress/` é um bind mount: o Core e dependências oficiais existem localmente, mas são reconstruídos a partir de versões fixadas; `wp-config.php`, tema próprio, mu-plugin e plugins com prefixo `sabuwu-` são versionáveis. Imagens editoriais necessárias devem ficar em `uploads/portfolio/`; outros uploads permanecem locais. Os GIFs anteriores continuam em `assets/images/` e seus caminhos no README foram preservados.
+`app/wordpress/` é um bind mount: o Core e dependências oficiais existem localmente, mas são reconstruídos a partir de versões fixadas; `wp-config.php`, tema próprio, mu-plugin e plugins com prefixo `sabuwu-` são versionáveis. Imagens editoriais necessárias devem ficar em `uploads/portfolio/`; outros uploads permanecem locais. `sabuwu` é o tema principal; `twentytwentyfive` fica instalado como reserva. Os GIFs do README de perfil permanecem em `assets/images/`.
+
+O HTML original fica em `docs/reference/portfolio.html`, separado da aplicação. `dist/sabuwu-wordpress.zip` reúne os arquivos do tema para instalação em outro WordPress. O [mapa das pastas](README.md) reúne os caminhos e guias do projeto.
+
+`config/plugins.lock` mantém segurança, autenticação e SEO como base. Query Monitor acompanha somente ambientes `local` e `development`; Akismet e WP Mail SMTP são instalados conforme a configuração de suas integrações. O [guia WordPress](wordpress.md) descreve esses critérios. Backups operacionais usam os scripts do projeto, sem plugin de backup; o Apache usa OPcache e não depende do LiteSpeed Cache.
 
 `database/seeds/content.json` reconstrói posts, páginas, taxonomias, menus, metadados editoriais e uma lista explícita de opções. Usuários, comentários, sessões e configuração privada de plugins não fazem parte do snapshot. Backups completos ficam em `backups/`, ignorado pelo Git.
 

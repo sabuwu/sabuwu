@@ -4,28 +4,28 @@ Core: **7.1.3**. PHP: **8.3**. WP-CLI: **2.12.0**, com SHA-256 verificado no bui
 
 O tema `sabuwu` e `mu-plugins/portfolio-hardening.php` são código próprio. O tema usa APIs nativas, sem construtor externo. O mu-plugin desativa pingbacks/XML-RPC, evita revelar erros detalhados de login, controla envio local de email e fornece um evento de diagnóstico de cron. Gutenberg e REST API continuam disponíveis.
 
-O tema Sabuwu 2.0.0 integra o layout de `app/portifolio_design.html`, com textos editáveis no Personalizador e cadastro nativo de projetos. Consulte [Portfólio WordPress](portfolio.md) para editar o conteúdo ou instalar o pacote em outra instalação.
+O tema Sabuwu 2.2.0 integra o layout da [referência HTML](reference/portfolio.html), com textos editáveis no Personalizador e cadastro nativo de projetos. Consulte [Portfólio WordPress](portfolio.md) para editar o conteúdo ou instalar o pacote em outra instalação.
 
 ## Plugins
 
-| Plugin | Versão fixada | Estado esperado em desenvolvimento | Motivo / configuração |
+| Plugin | Versão fixada | Critério de instalação e ativação | Motivo / configuração |
 | --- | --- | --- | --- |
-| Akismet | 5.7.2 | Ativo | Antispam obrigatório; validação remota exige `AKISMET_API_KEY`. |
-| LiteSpeed Cache | 7.9.1 | Ativo | Solicitado; Apache não oferece o page cache LiteSpeed. |
-| All-In-One Security | 5.4.10 | Ativo | Solução principal sem licença externa: firewall e bloqueio de login. |
-| Two Factor | 0.17.0 | Ativo | Suporte TOTP; cadastro do dispositivo é individual. |
-| UpdraftPlus | 1.26.8 | Ativo | Backup operacional; destino remoto/agendamento dependem de configuração. |
-| WP Mail SMTP | 4.10.2 | Ativo | Transporte SMTP configurável pelo ambiente. |
-| Yoast SEO | 28.6 | Ativo | Única solução SEO: títulos, sitemap e Open Graph. |
-| Query Monitor | 4.0.7 | Ativo somente em desenvolvimento | Diagnóstico; o manifesto desativa em produção. |
+| All-In-One Security | 5.4.10 | Base, todos os ambientes | Firewall e bloqueio de login. |
+| Two Factor | 0.17.0 | Base, todos os ambientes | Suporte TOTP; cadastro do dispositivo é individual. |
+| Yoast SEO | 28.6 | Base, todos os ambientes | Títulos, sitemap e Open Graph. |
+| Query Monitor | 4.0.7 | Somente `local` e `development` | Diagnóstico; desativado nos demais ambientes. |
+| Akismet | 5.7.2 | Condicional: chave no ambiente ou configuração salva no painel | Antispam de comentários; validação remota exige chave válida. |
+| WP Mail SMTP | 4.10.2 | Condicional: `SMTP_HOST` ou transporte configurado no painel | Integração de email; configurações já salvas no painel são preservadas. |
 
-Versões e escopo estão em `config/plugins.lock`. O instalador baixa os arquivos versionados de `downloads.wordpress.org` via WP-CLI e não atualiza automaticamente para a versão mais recente. Os metadados oficiais indicam compatibilidade com 7.1.3, exceto Query Monitor, cujo `tested` era 7.0.7 na consulta; o funcionamento local deve ser confirmado nos testes.
+Versões e escopos estão em `config/plugins.lock`: `all` para a base, `development` para diagnóstico, `akismet` e `smtp` para as integrações condicionais. O instalador baixa os arquivos versionados de `downloads.wordpress.org` via WP-CLI e não atualiza automaticamente para a versão mais recente. Configuração salva no painel pode habilitar uma integração mesmo sem variáveis correspondentes no ambiente.
+
+Comentários existentes e suas configurações são mantidos. Para usar antispam em posts com comentários abertos, configure uma chave válida do Akismet pelo painel ou em `AKISMET_API_KEY`; apenas instalar o plugin não comprova funcionamento. Sem essa configuração, ele não faz parte da instalação base.
 
 Escolheu-se All-In-One Security como alternativa à preferência por Wordfence para permitir setup local sem cadastrar licença/conta. Não instalar outro firewall nem outro limitador de login. TOTP fica disponível em Usuários → Seu perfil, pelo Two Factor. O módulo TOTP interno do All-In-One Security é desabilitado para evitar duplicação com Two Factor. A proteção local usa cinco tentativas, janela de 15 minutos e bloqueio temporário de 15 minutos.
 
-No Apache, LiteSpeed Cache oferece recursos independentes de servidor, como otimizações de CSS/JS e banco, quando configurados. O cache de páginas exige LiteSpeed/OpenLiteSpeed ou integração QUIC.cloud; não está implementado aqui. Otimização remota de imagens exige configuração externa. OPcache do PHP está habilitado. Não se adicionou Redis sem necessidade medida.
+LiteSpeed Cache foi retirado: o servidor é Apache e não usa suas otimizações. OPcache do PHP permanece habilitado. UpdraftPlus também foi retirado, pois o backup operacional usa `scripts/backup.sh` e `scripts/restore.sh`, descritos em [Comandos](commands.md). Não se adicionou Redis sem necessidade medida.
 
-O site local usa `blog_public=0`; no lançamento público, habilite indexação, revise título/descrição/SEO e configure HTTPS. SMTP vazio bloqueia emails no desenvolvimento, evitando mensagens reais; SMTP e Akismet não podem ser considerados funcionais sem credenciais e teste externo.
+O site local usa `blog_public=0`; no lançamento público, habilite indexação, revise título/descrição/SEO e configure HTTPS. Em ambientes diferentes de produção, o mu-plugin bloqueia emails quando `SMTP_HOST` está vazio, mesmo que o WP Mail SMTP tenha transporte salvo no painel. Essa configuração salva mantém o plugin instalado, mas não libera envio local. SMTP e Akismet exigem credenciais e teste externo para confirmar funcionamento.
 
 ## WP-Cron
 
@@ -48,5 +48,5 @@ Após editar posts, páginas, menus ou configurações editoriais, execute `./sc
 
 Atualizações de segurança têm prioridade: consulte releases oficiais, altere versões/digests, reconstrua, confira checksums e rode os testes. Atualizações de recursos ou versões principais exigem backup e validação prévia em ambiente descartável. Atualizações automáticas são desativadas para impedir divergência do manifesto; isso exige manutenção ativa, inclusive antes de publicar.
 
-Fontes: [WordPress](https://wordpress.org/download/), [LiteSpeed Cache](https://wordpress.org/plugins/litespeed-cache/), [All-In-One Security](https://wordpress.org/plugins/all-in-one-wp-security-and-firewall/), [Two Factor](https://wordpress.org/plugins/two-factor/).
+Fontes: [WordPress](https://wordpress.org/download/), [All-In-One Security](https://wordpress.org/plugins/all-in-one-wp-security-and-firewall/), [Two Factor](https://wordpress.org/plugins/two-factor/).
 

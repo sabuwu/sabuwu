@@ -16,14 +16,16 @@
 | HTTP | `nosniff`, Referrer-Policy e Permissions-Policy; sem política CSP incompatível com o painel. |
 | Cron | Serviço externo não-root e heartbeat; execução independente de acessos HTTP. |
 | Logs | Rotação de logs dos containers: três arquivos de 10 MB. Debug local em `/tmp/wordpress-debug.log`. |
-| Backup | Snapshot editorial versionável e backup privado SQL + wp-content; scripts de restauração. |
+| Backup | Snapshot editorial versionável e backup privado SQL + wp-content por `scripts/backup.sh`; restauração por `scripts/restore.sh`. |
 | Código próprio | APIs WordPress; escape de dados no tema; import CLI sem endpoint público e valores SQL via `$wpdb->insert`. |
 
 O serviço bootstrap usa root por poucos segundos para ajustar arquivos privados. MariaDB usa seu entrypoint oficial e roda o processo do banco como `mysql`. Nenhum container é privilegiado. Acesso ao banco root não é fornecido à aplicação.
 
 ## Recomendado para produção
 
-Exigir inscrição TOTP para todos os administradores; testar recuperação antes de obrigar 2FA. Configurar destino externo e retenção dos backups, restauração periódica, SMTP/Akismet e monitoramento. Testar regras/scanner do firewall com tráfego real. O suporte instalado não prova eficácia completa nem substitui controles no proxy.
+Exigir inscrição TOTP para todos os administradores; testar recuperação antes de obrigar 2FA. Configurar destino externo e retenção dos backups gerados pelo script e testar restauração periódica. Para posts com comentários abertos, configurar uma chave válida do Akismet; para email, configurar o transporte e verificar entrega. Essas integrações são condicionais e preservam configurações salvas no painel. Testar regras/scanner do firewall com tráfego real e configurar monitoramento. O suporte instalado não prova eficácia completa nem substitui controles no proxy.
+
+Em ambientes diferentes de produção, a proteção local bloqueia email quando `SMTP_HOST` está vazio, inclusive com WP Mail SMTP configurado pelo painel. Query Monitor permanece somente em `local` e `development`.
 
 Terminar TLS em proxy confiável e publicar apenas esse proxy. Definir `WORDPRESS_URL=https://...`, `WORDPRESS_FORCE_SSL_ADMIN=true`, `WP_ENVIRONMENT_TYPE=production` e `WORDPRESS_DEBUG=false`. `TRUST_REVERSE_PROXY=true` só deve ser usado quando o WordPress não estiver diretamente acessível e o proxy sobrescrever `X-Forwarded-Proto`; o projeto não confia nesses cabeçalhos por padrão. Revisar mapeamento de IP do proxy antes de usar bloqueios por IP.
 

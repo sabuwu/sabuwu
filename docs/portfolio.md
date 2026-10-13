@@ -1,6 +1,6 @@
 # Portfólio WordPress
 
-O tema nativo **Sabuwu 2.2.0** reproduz o design de `app/portifolio_design.html` e permite editar o conteúdo pelo WordPress, sem construtor de páginas. O HTML original permanece como referência; o site usa os arquivos PHP, CSS e JavaScript do tema `sabuwu`.
+O tema nativo **Sabuwu 2.2.0** reproduz o design da [referência HTML](reference/portfolio.html) e permite editar o conteúdo pelo WordPress, sem construtor de páginas. O HTML original fica em `docs/reference/portfolio.html`; o site usa os arquivos PHP, CSS e JavaScript do tema `sabuwu`.
 
 No ambiente Docker deste projeto, o tema já está ativo. Com os serviços iniciados, acesse <http://localhost:8088/> e edite o site em <http://localhost:8088/wp-admin/>. Para preparar o ambiente, siga [Execução local](setup.md).
 
@@ -16,7 +16,7 @@ A página inicial do portfólio exibe a apresentação, a faixa de tecnologias e
 
 O menu padrão aponta para as páginas `/projetos/`, `/blog/`, `/perfil/`, `/experiencia/` e `/contato/`. **Blog** usa a página de posts configurada em **Configurações → Leitura**; se não houver uma, o tema cria e configura `/blog/` na atualização, mantendo a página inicial do portfólio. Essa página lista os posts com resumo e paginação. Para substituir a navegação, atribua um menu à localização **Navegação principal** em **Aparência → Menus**; links de menu antigos que apontam para essas âncoras são redirecionados às novas páginas. Links internos abrem na mesma aba; destinos externos abrem em outra aba com `rel="noopener noreferrer"`.
 
-Para instalar em outro WordPress, envie [dist/sabuwu-wordpress.zip](../dist/sabuwu-wordpress.zip) em **Aparência → Temas → Adicionar novo → Enviar tema** e ative **Sabuwu**. O ZIP contém a pasta `sabuwu/`; também é possível copiá-la diretamente para `wp-content/themes/`. O pacote instala o tema; as edições e os projetos ficam no banco da instalação.
+Para instalar em outro WordPress, envie [dist/sabuwu-wordpress.zip](../dist/sabuwu-wordpress.zip) em **Aparência → Temas → Adicionar novo → Enviar tema** e ative **Sabuwu**. O ZIP contém a pasta `sabuwu/` e seu [README](../app/wordpress/wp-content/themes/sabuwu/README.md); também é possível copiá-la diretamente para `wp-content/themes/`. O pacote instala o tema; as edições e os projetos ficam no banco da instalação. O tema não exige construtor de páginas nem plugins para o layout e cadastro de projetos.
 
 Ao atualizar uma instalação que já usa `sabuwu`, abra o painel como administrador para atualizar as rotas dos projetos. Se alguma página de projeto retornar 404, abra **Configurações → Links permanentes** e clique em **Salvar alterações** uma vez.
 

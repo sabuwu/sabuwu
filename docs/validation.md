@@ -42,3 +42,23 @@ O método inicial de instalação por prompt ecoou a senha nos logs locais. Foi 
 A listagem final confirmou os oito plugins ativos, mas registrou um aviso transitório na consulta automática de atualizações. Uma consulta posterior pela API HTTP do próprio WordPress à API oficial de plugins passou com verificação TLS habilitada. Isso valida a conectividade; não afirma que as versões fixadas serão sempre as mais recentes.
 
 O ambiente temporário `sabuwu-repro-test`, seus containers, volumes e arquivos privados de teste foram removidos. O projeto principal permanece em execução; não houve commit, push nem staging.
+
+## Limpeza de plugins e organização — 13/10/2026
+
+Os registros acima descrevem o ambiente de 10/10/2026, antes da limpeza. O ambiente local agora mantém All-In-One Security, Two Factor, Yoast SEO e Query Monitor em desenvolvimento. LiteSpeed Cache e UpdraftPlus foram retirados; Akismet e WP Mail SMTP foram retirados por estarem sem configuração e permanecem como integrações condicionais no manifesto. `twentytwentyfive` permanece como tema reserva; os outros dois temas padrão foram retirados.
+
+Um backup privado anterior às remoções foi guardado em `backups/20261013-190730/`, incluindo banco, wp-content, configuração e artefatos dos plugins. A comparação dos dados de nove tabelas editoriais e de usuários confirmou igualdade com o backup após a limpeza e os testes. Os eventos dos plugins retirados e suas pastas geradas foram limpos; opções salvas dos plugins foram preservadas.
+
+| Verificação | Resultado |
+| --- | --- |
+| Sintaxe PHP/Bash e `docker compose config --quiet` | OK |
+| Testes existentes do tema | OK — 38 verificações; fixtures removidas e transação revertida |
+| Teste existente de integração | OK — proteção HTTP, configuração, separação de segredos e evento executado pelo cron externo |
+| Instalador com WP-CLI simulado e predicados PHP | OK — nove testes de escopos, integrações condicionais e preservação de drop-ins externos |
+| Entrypoint em árvore temporária | OK — instalação limpa, preservação de arquivos existentes e Core já presente |
+| Referência HTML e perfil GitHub | OK — HTML movido sem alterações; conteúdo anterior do README e GIFs preservados |
+| Documentação e pacote do tema | OK — links locais válidos e ZIP sincronizado com os 23 arquivos do tema |
+| Imagem final e reinício | OK — scripts e manifesto sincronizados por SHA-256; WordPress, banco e cron saudáveis; quatro plugins ativos e tema Sabuwu preservado |
+| HTTP após o reinício | OK — home, blog, projetos, perfil, experiência, contato, login e busca retornaram 200 |
+
+Os testes temporários do instalador usam PHP 8.5 no host e um substituto do WP-CLI; não validam hooks reais. Os testes do tema e da integração foram executados no WordPress local com PHP 8.3. A cópia do Core continua usando `cp -rn`, que preserva arquivos existentes, mas falha se encontrar um symlink preexistente quebrado no lugar de um diretório de plugin.

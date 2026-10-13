@@ -19,6 +19,8 @@ Use `COMPOSE_ENGINE=podman` antes dos scripts para selecionar Podman. `scripts/c
 
 `wp.sh` usa o container WordPress em execução, evitando criar um container para cada comando. Para manutenção com esse serviço parado, use `docker compose run --rm -T --no-deps wp-cli <comando>`; o banco deve estar disponível.
 
+`install-plugins.sh` aplica as versões e os critérios de `config/plugins.lock`: segurança/2FA/SEO na base, Query Monitor somente em `local` e `development`, Akismet e WP Mail SMTP conforme chave ou configuração da integração. As configurações existentes no painel são preservadas. Consulte [WordPress e conteúdo](wordpress.md) para os detalhes, incluindo o bloqueio de email local com `SMTP_HOST` vazio. Depois de editar o manifesto, reconstrua a imagem com `docker compose up -d --build`; depois de alterar variáveis do ambiente, recrie os serviços para aplicá-las.
+
 ## Conteúdo versionado
 
 ```bash

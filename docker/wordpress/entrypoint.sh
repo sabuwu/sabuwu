@@ -3,14 +3,16 @@ set -euo pipefail
 umask 022
 if [[ ! -f wp-includes/version.php ]]; then
     echo 'Populating local WordPress core from the pinned official image.'
-    bundled_hello=true
-    [[ -f wp-content/plugins/hello.php ]] && bundled_hello=false
-    bundled_config=true
-    [[ -f wp-config-docker.php ]] && bundled_config=false
+    bundled_extras=()
+    for extra in wp-config-docker.php wp-content/plugins/hello.php \
+        wp-content/plugins/akismet wp-content/themes/twentytwentythree \
+        wp-content/themes/twentytwentyfour; do
+        [[ -e "$extra" || -L "$extra" ]] || bundled_extras+=("$extra")
+    done
     cp -rn /usr/src/wordpress/. /var/www/html/
-    # Omit the unused bundled sample, preserving any pre-existing author file.
-    [[ "$bundled_hello" == false ]] || rm -f wp-content/plugins/hello.php
-    [[ "$bundled_config" == false ]] || rm -f wp-config-docker.php
+    # Keep the latest bundled fallback theme. Optional Akismet comes from the
+    # manifest; omit unused bundled extras, preserving any pre-existing files.
+    for extra in "${bundled_extras[@]}"; do rm -rf -- "$extra"; done
 fi
 [[ -f wp-config.php ]] || cp /opt/portfolio/app/wordpress/wp-config.php wp-config.php
 [[ -f .htaccess ]] || cp /opt/portfolio/docker/wordpress/htaccess .htaccess

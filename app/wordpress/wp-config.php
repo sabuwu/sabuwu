@@ -1,5 +1,4 @@
 <?php
-define( 'WP_CACHE', true );
 
 /** Application configuration; secrets are environment values or private files. */
 function portfolio_env(string $name, string $default = ''): string {

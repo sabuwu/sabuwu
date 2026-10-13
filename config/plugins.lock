@@ -1,10 +1,9 @@
-# slug version environment
-akismet 5.7.2 all
-litespeed-cache 7.9.1 all
+# slug version scope
+# Optional integrations are installed only when configured (environment or dashboard).
+akismet 5.7.2 akismet
 all-in-one-wp-security-and-firewall 5.4.10 all
 two-factor 0.17.0 all
-updraftplus 1.26.8 all
-wp-mail-smtp 4.10.2 all
+wp-mail-smtp 4.10.2 smtp
 wordpress-seo 28.6 all
 query-monitor 4.0.7 development
 
