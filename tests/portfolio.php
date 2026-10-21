@@ -222,6 +222,10 @@ try {
     $assert($customize->get_control('sabuwu_resume_url') !== null && $customize->get_control('sabuwu_projects_show_demo') !== null, 'O Personalizador deve registrar controles de currículo e exemplos.');
     $assert($customize->get_setting('sabuwu_resume_url')->sanitize('javascript:alert(1)') === ''
         && $customize->get_setting('sabuwu_resume_url')->sanitize('#') === '', 'O controle de currículo deve rejeitar protocolos inseguros e links vazios.');
+    $resume_page = get_page_by_path('resume');
+    $assert($resume_page instanceof WP_Post && $resume_page->post_status === 'publish'
+        && locate_template('page-resume.php') !== '', 'O currículo deve existir como página pública com template próprio.');
+    $assert(sabuwu_defaults()['resume_url'] === '/resume/', 'O destino padrão do currículo deve usar a página WordPress /resume/.');
     $assert($customize->get_setting('sabuwu_projects_show_demo')->sanitize('0') === false
         && $customize->get_setting('sabuwu_projects_show_demo')->sanitize('1') === true, 'O controle de exemplos deve sanitizar valores de checkbox corretamente.');
     $assert($customize->get_setting('sabuwu_hero_note')->sanitize("Primeira linha\n<script>alert(1)</script>Segunda linha") === "Primeira linha\nSegunda linha", 'Textos longos do Personalizador devem preservar linhas e remover scripts.');

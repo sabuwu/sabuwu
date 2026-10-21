@@ -26,8 +26,24 @@ add_action('wp_enqueue_scripts', static function (): void {
     $version = wp_get_theme()->get('Version');
     wp_enqueue_style('sabuwu', get_stylesheet_uri(), [], $version);
     wp_enqueue_script('sabuwu', get_theme_file_uri('/assets/js/portfolio.js'), [], $version, ['in_footer' => true, 'strategy' => 'defer']);
+    if (is_page('resume')) {
+        wp_enqueue_style('sabuwu-resume', get_theme_file_uri('/assets/css/resume.css'), ['sabuwu'], $version);
+        wp_enqueue_script('sabuwu-resume', get_theme_file_uri('/assets/js/resume.js'), [], $version, ['in_footer' => true, 'strategy' => 'defer']);
+    }
     if (is_singular() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
+    }
+});
+
+add_action('template_redirect', static function (): void {
+    global $wp;
+    if (!in_array(untrailingslashit((string) $wp->request), ['curriculo', 'curriculo.html', 'resume.html'], true)) {
+        return;
+    }
+    $page = get_page_by_path('resume');
+    if ($page && $page->post_status === 'publish') {
+        wp_safe_redirect(get_permalink($page), 301);
+        exit;
     }
 });
 
@@ -41,6 +57,9 @@ function sabuwu_is_portfolio_home(): bool {
 }
 
 add_filter('language_attributes', static function (string $attributes): string {
+    if (is_page('resume')) {
+        return (string) preg_replace('/\blang="[^"]*"/', 'lang="en"', $attributes);
+    }
     return sabuwu_is_portfolio()
         ? (string) preg_replace('/\blang="[^"]*"/', 'lang="' . esc_attr(sabuwu_setting('content_language')) . '"', $attributes)
         : $attributes;
@@ -100,7 +119,7 @@ function sabuwu_setup_blog_page(): void {
 add_action('after_switch_theme', 'sabuwu_setup_blog_page');
 
 function sabuwu_default_navigation(): void {
-    $links = ['projetos' => __('Projetos', 'sabuwu'), 'blog' => __('Blog', 'sabuwu'), 'perfil' => __('Perfil', 'sabuwu'), 'experiencia' => __('Experiência', 'sabuwu'), 'contato' => __('Contato', 'sabuwu')];
+    $links = ['projetos' => __('Projetos', 'sabuwu'), 'blog' => __('Blog', 'sabuwu'), 'perfil' => __('Perfil', 'sabuwu'), 'experiencia' => __('Experiência', 'sabuwu'), 'contato' => __('Contato', 'sabuwu'), 'resume' => __('Currículo', 'sabuwu')];
     echo '<ul class="nav-list">';
     foreach ($links as $id => $label) {
         printf('<li><a href="%s">%s</a></li>', esc_url(sabuwu_section_url($id)), esc_html($label));
@@ -189,6 +208,7 @@ add_action('admin_init', static function (): void {
             'perfil' => __('Perfil', 'sabuwu'),
             'experiencia' => __('Experiência', 'sabuwu'),
             'contato' => __('Contato', 'sabuwu'),
+            'resume' => __('Currículo', 'sabuwu'),
         ];
         foreach ($pages as $slug => $title) {
             $published = get_posts([
@@ -213,4 +233,3 @@ add_action('admin_init', static function (): void {
         update_option('sabuwu_theme_version', $version, false);
     }
 });
-

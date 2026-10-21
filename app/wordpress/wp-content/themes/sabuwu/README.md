@@ -1,6 +1,6 @@
 # Tema Sabuwu
 
-Tema nativo WordPress **2.2.0** para portfólio e blog, com conteúdo editável pelo painel. Requer WordPress 6.4 ou superior e PHP 8.0 ou superior, conforme o cabeçalho de `style.css`.
+Tema nativo WordPress **2.3.0** para portfólio, currículo e blog, com conteúdo editável pelo painel. Requer WordPress 6.4 ou superior e PHP 8.0 ou superior, conforme o cabeçalho de `style.css`.
 
 ## Instalação
 
@@ -8,7 +8,7 @@ Envie o ZIP do tema em **Aparência → Temas → Adicionar novo → Enviar tema
 
 O pacote contém somente o tema. Posts, páginas, projetos, mídia e configurações permanecem no banco e nos uploads de cada instalação. Faça backup antes de atualizar uma instalação existente.
 
-Abra o painel como administrador após instalar ou atualizar. O tema cria as páginas **Projetos**, **Perfil**, **Experiência** e **Contato** quando faltarem. Com uma página inicial estática e sem página de posts definida, também cria e configura **Blog**, preservando a página inicial selecionada. Para usar o portfólio como home, selecione uma página estática em **Configurações → Leitura**; o modelo **Portfólio** também pode ser atribuído a uma página. **Seus posts mais recentes** mostra a listagem do blog.
+Abra o painel como administrador após instalar ou atualizar. O tema cria as páginas **Projetos**, **Perfil**, **Experiência**, **Contato** e **Currículo** (`/resume/`) quando faltarem. Com uma página inicial estática e sem página de posts definida, também cria e configura **Blog**, preservando a página inicial selecionada. Para usar o portfólio como home, selecione uma página estática em **Configurações → Leitura**; o modelo **Portfólio** também pode ser atribuído a uma página. **Seus posts mais recentes** mostra a listagem do blog.
 
 ## Edição do conteúdo
 
@@ -18,7 +18,7 @@ Abra o painel como administrador após instalar ou atualizar. O tema cria as pá
 4. Publique posts normalmente para atualizar o blog e as três publicações recentes na home do portfólio. Configure a página de posts em **Configurações → Leitura**.
 5. Para substituir a navegação padrão, atribua um menu à localização **Navegação principal** em **Aparência → Menus**.
 
-Para disponibilizar um currículo, envie o PDF pela biblioteca de mídia e cole a URL no Personalizador. Ajuste o idioma do conteúdo ao traduzir o portfólio. O tema integra título e descrição com Yoast SEO quando o plugin estiver ativo.
+O currículo completo é servido pela página `/resume/`, com layout responsivo e impressão em A4. Os caminhos antigos `/resume.html`, `/curriculo.html` e `/curriculo/` redirecionam para ela. O botão de currículo da home aponta para essa página por padrão; para oferecer um PDF em vez da página, envie o arquivo pela biblioteca de mídia e cole a URL no Personalizador. Ajuste o idioma do conteúdo ao traduzir o portfólio. O tema integra título e descrição com Yoast SEO quando o plugin estiver ativo.
 
 Se um estudo de caso retornar 404 após a ativação, abra **Configurações → Links permanentes** e salve uma vez para atualizar as rotas.
 
@@ -29,6 +29,6 @@ Se um estudo de caso retornar 404 após a ativação, abra **Configurações →
 - `template-parts/`: seções do portfólio e publicações recentes.
 - `front-page.php`, `page-*.php`, `index.php` e `single-sabuwu_project.php`: páginas e listagens.
 - `style.css`: identificação e estilos do tema.
-- `assets/`: estilos do editor e JavaScript.
+- `assets/`: estilos do editor, currículo e JavaScript.
 
 Edite os arquivos desta pasta ao desenvolver o tema; alterações no Core WordPress são independentes do pacote.

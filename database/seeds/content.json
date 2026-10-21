@@ -252,6 +252,31 @@
                 "post_type": "page",
                 "post_mime_type": "",
                 "comment_count": "0"
+            },
+            {
+                "ID": "76",
+                "post_author": "0",
+                "post_date": "2026-10-21 19:42:42",
+                "post_date_gmt": "2026-10-21 22:42:42",
+                "post_content": "",
+                "post_title": "Currículo",
+                "post_excerpt": "",
+                "post_status": "publish",
+                "comment_status": "closed",
+                "ping_status": "closed",
+                "post_password": "",
+                "post_name": "resume",
+                "to_ping": "",
+                "pinged": "",
+                "post_modified": "2026-10-21 19:42:42",
+                "post_modified_gmt": "2026-10-21 22:42:42",
+                "post_content_filtered": "",
+                "post_parent": "0",
+                "guid": "http://localhost:8088/resume/",
+                "menu_order": "0",
+                "post_type": "page",
+                "post_mime_type": "",
+                "comment_count": "0"
             }
         ],
         "postmeta": [
